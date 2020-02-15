@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.rodrigo.retrofitmvvm">
+    package="com.rodrigo.globallogic">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,12 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Activities.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Activities.DetalleLaptop" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name="com.rodrigo.globallogic.Activities.DetalleLaptop" />
+        <activity android:name="com.rodrigo.globallogic.Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

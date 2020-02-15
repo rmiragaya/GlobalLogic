@@ -1,4 +1,4 @@
-package com.rodrigo.retrofitmvvm.Adapters;
+package com.rodrigo.globallogic.Adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -12,8 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rodrigo.retrofitmvvm.Models.Laptop;
-import com.rodrigo.retrofitmvvm.R;
+import com.rodrigo.globallogic.Models.Laptop;
+import com.rodrigo.globallogic.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

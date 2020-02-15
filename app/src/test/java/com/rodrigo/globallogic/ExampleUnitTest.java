@@ -1,4 +1,4 @@
-package com.rodrigo.retrofitmvvm;
+package com.rodrigo.globallogic;
 
 import org.junit.Test;
 

@@ -1,11 +1,11 @@
-package com.rodrigo.retrofitmvvm.ViewModel;
+package com.rodrigo.globallogic.ViewModel;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.rodrigo.retrofitmvvm.Models.Laptop;
-import com.rodrigo.retrofitmvvm.Repositories.LaptopsRepo;
+import com.rodrigo.globallogic.Models.Laptop;
+import com.rodrigo.globallogic.Repositories.LaptopsRepo;
 
 import java.util.List;
 
@@ -27,4 +27,5 @@ public class MainActivityVM extends ViewModel {
     public LiveData<List<Laptop>> getLaptops(){
         return mLaptops;
     }
+
 }

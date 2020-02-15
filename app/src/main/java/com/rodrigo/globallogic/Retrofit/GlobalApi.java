@@ -1,6 +1,6 @@
-package com.rodrigo.retrofitmvvm.Retrofit;
+package com.rodrigo.globallogic.Retrofit;
 
-import com.rodrigo.retrofitmvvm.Models.Laptop;
+import com.rodrigo.globallogic.Models.Laptop;
 
 import java.util.List;
 

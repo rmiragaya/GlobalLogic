@@ -1,4 +1,4 @@
-package com.rodrigo.retrofitmvvm.Models;
+package com.rodrigo.globallogic.Models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

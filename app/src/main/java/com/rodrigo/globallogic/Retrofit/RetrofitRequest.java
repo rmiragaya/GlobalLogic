@@ -1,4 +1,4 @@
-package com.rodrigo.retrofitmvvm.Retrofit;
+package com.rodrigo.globallogic.Retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

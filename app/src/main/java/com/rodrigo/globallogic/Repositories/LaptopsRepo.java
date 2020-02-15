@@ -1,14 +1,13 @@
-package com.rodrigo.retrofitmvvm.Repositories;
+package com.rodrigo.globallogic.Repositories;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.rodrigo.retrofitmvvm.Models.Laptop;
-import com.rodrigo.retrofitmvvm.Retrofit.GlobalApi;
-import com.rodrigo.retrofitmvvm.Retrofit.RetrofitRequest;
+import com.rodrigo.globallogic.Models.Laptop;
+import com.rodrigo.globallogic.Retrofit.GlobalApi;
+import com.rodrigo.globallogic.Retrofit.RetrofitRequest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +34,7 @@ public class LaptopsRepo {
         apiRequest = RetrofitRequest.getRetrofitInstance().create(GlobalApi.class);
     }
 
+
     public MutableLiveData<List<Laptop>> getLaptopsList(){
         final MutableLiveData<List<Laptop>> data = new MutableLiveData<>();
 //        setLaptopsList();
@@ -50,6 +50,7 @@ public class LaptopsRepo {
             @Override
             public void onFailure(Call<List<Laptop>> call, Throwable t) {
                 //todo cartel de error
+                data.setValue(null);
                 Log.d(TAG, "onFailure: call");
                 Log.d(TAG, "onFailure: " + t.fillInStackTrace());
             }
@@ -57,5 +58,6 @@ public class LaptopsRepo {
 
         return data;
     }
+
 
 }

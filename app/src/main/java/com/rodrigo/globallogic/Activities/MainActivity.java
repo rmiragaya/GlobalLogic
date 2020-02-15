@@ -1,20 +1,24 @@
-package com.rodrigo.retrofitmvvm.Activities;
+package com.rodrigo.globallogic.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
-import com.rodrigo.retrofitmvvm.Adapters.RecyclerAdapter;
-import com.rodrigo.retrofitmvvm.Models.Laptop;
-import com.rodrigo.retrofitmvvm.R;
-import com.rodrigo.retrofitmvvm.ViewModel.MainActivityVM;
+import com.airbnb.lottie.LottieAnimationView;
+import com.rodrigo.globallogic.Adapters.RecyclerAdapter;
+import com.rodrigo.globallogic.Models.Laptop;
+import com.rodrigo.globallogic.R;
+import com.rodrigo.globallogic.ViewModel.MainActivityVM;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +28,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
     public static final String DETALLE = "detalle";
 
     private RecyclerAdapter adapter;
-    private RecyclerView recyclerView;
     private ArrayList<Laptop> laptopArrayList = new ArrayList<>();
 
     /* LiveData */
     private MainActivityVM mainActivityVM;
+    /* Lottie */
+    private LottieAnimationView noEncontrado;
+    private ConstraintLayout loadingBkg;
 
 
     @Override
@@ -36,24 +42,33 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        noEncontrado = findViewById(R.id.no_encontrado_lottie);
+        loadingBkg = findViewById(R.id.loadingBkg);
+
+        initRecycler();
+
+        getLaptops();
+    }
+
+    private void getLaptops(){
         mainActivityVM = ViewModelProviders.of(this).get(MainActivityVM.class);
         mainActivityVM.init();
         mainActivityVM.getLaptops().observe(this, new Observer<List<Laptop>>() {
             @Override
             public void onChanged(List<Laptop> laptops) {
-                laptopArrayList = new ArrayList<>(laptops);
-                //todo: adapter.notifyDataSetChanged();
-//                adapter.notifyDataSetChanged();
-                adapter.updateData(laptopArrayList);
+                if (laptops != null){
+                    noEncontrado.setVisibility(View.GONE);
+                    loadingBkg.setVisibility(View.GONE);
+                    laptopArrayList = new ArrayList<>(laptops);
+                    adapter.updateData(laptopArrayList);
+                }
             }
         });
-
-        initRecycler();
     }
 
     private void initRecycler(){
         adapter = new RecyclerAdapter(this, laptopArrayList);
-        recyclerView = findViewById(R.id.recy_id);
+        RecyclerView recyclerView = findViewById(R.id.recy_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
