@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private static final String TAG = "RecyclerAdapter";
 
-    private Context context;
     private ArrayList<Laptop> laptopList;
     private OnItemClickListener mListener;
 
@@ -34,9 +33,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         mListener = listener;
     }
 
-    public RecyclerAdapter(Context context, ArrayList<Laptop> productoList) {
+    public RecyclerAdapter( ArrayList<Laptop> productoList) {
         this.laptopList = new ArrayList<>(productoList);
-        this.context = context;
 
     }
 
@@ -63,13 +61,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return laptopList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+     class ViewHolder extends RecyclerView.ViewHolder{
 
         ImageView imagen;
         TextView titulo, detalle;
         ConstraintLayout mLayout;
 
-        public ViewHolder(@NonNull View itemView) {
+         ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagen = itemView.findViewById(R.id.imagen_id);
             titulo = itemView.findViewById(R.id.titulo_id);

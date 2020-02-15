@@ -13,13 +13,12 @@ import java.util.List;
 public class MainActivityVM extends ViewModel {
 
     private MutableLiveData<List<Laptop>> mLaptops;
-    private LaptopsRepo mRepo;
 
     public void init(){
         if (mLaptops != null){
             return;
         }
-        mRepo = LaptopsRepo.getInstance();
+        LaptopsRepo mRepo = LaptopsRepo.getInstance();
         mLaptops = mRepo.getLaptopsList();
 
     }

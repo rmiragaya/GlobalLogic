@@ -30,8 +30,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
     private RecyclerAdapter adapter;
     private ArrayList<Laptop> laptopArrayList = new ArrayList<>();
 
-    /* LiveData */
-    private MainActivityVM mainActivityVM;
     /* Lottie */
     private LottieAnimationView noEncontrado;
     private ConstraintLayout loadingBkg;
@@ -51,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
     }
 
     private void getLaptops(){
-        mainActivityVM = ViewModelProviders.of(this).get(MainActivityVM.class);
+        /* live data */
+        MainActivityVM mainActivityVM = ViewModelProviders.of(this).get(MainActivityVM.class);
         mainActivityVM.init();
         mainActivityVM.getLaptops().observe(this, new Observer<List<Laptop>>() {
             @Override
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
     }
 
     private void initRecycler(){
-        adapter = new RecyclerAdapter(this, laptopArrayList);
+        adapter = new RecyclerAdapter(laptopArrayList);
         RecyclerView recyclerView = findViewById(R.id.recy_id);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
