@@ -65,7 +65,7 @@
         android:visibility="visible">
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/no_encontrado_lottie"
+            android:id="@+id/loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
@@ -76,6 +76,29 @@
             app:lottie_autoPlay="true"
             app:lottie_fileName="loading.json"
             app:lottie_loop="true" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/no_encontrado_Bkg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D3EEEEEE"
+        android:visibility="invisible">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/noEncontrado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="no_encontrado.json"
+        app:lottie_loop="true" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

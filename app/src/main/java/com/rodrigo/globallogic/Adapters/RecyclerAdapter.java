@@ -1,6 +1,5 @@
 package com.rodrigo.globallogic.Adapters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

@@ -20,7 +20,6 @@ public class MainActivityVM extends ViewModel {
         }
         LaptopsRepo mRepo = LaptopsRepo.getInstance();
         mLaptops = mRepo.getLaptopsList();
-
     }
 
     public LiveData<List<Laptop>> getLaptops(){

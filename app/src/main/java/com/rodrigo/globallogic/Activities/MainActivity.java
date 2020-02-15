@@ -6,18 +6,23 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.security.ProviderInstaller;
 import com.rodrigo.globallogic.Adapters.RecyclerAdapter;
 import com.rodrigo.globallogic.Models.Laptop;
 import com.rodrigo.globallogic.R;
+import com.rodrigo.globallogic.Tools.Utils;
 import com.rodrigo.globallogic.ViewModel.MainActivityVM;
 
 import java.util.ArrayList;
@@ -31,17 +36,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
     private ArrayList<Laptop> laptopArrayList = new ArrayList<>();
 
     /* Lottie */
-    private LottieAnimationView noEncontrado;
-    private ConstraintLayout loadingBkg;
-
+    private LottieAnimationView loading, noEncontrado;
+    private ConstraintLayout loadingBkg, noEncontradoBkg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        noEncontrado = findViewById(R.id.no_encontrado_lottie);
+        Utils.checkTls(this);
+
+        loading = findViewById(R.id.loading);
         loadingBkg = findViewById(R.id.loadingBkg);
+        noEncontrado = findViewById(R.id.noEncontrado);
+        noEncontradoBkg = findViewById(R.id.no_encontrado_Bkg);
 
         initRecycler();
 
@@ -55,12 +63,20 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         mainActivityVM.getLaptops().observe(this, new Observer<List<Laptop>>() {
             @Override
             public void onChanged(List<Laptop> laptops) {
-                if (laptops != null){
-                    noEncontrado.setVisibility(View.GONE);
-                    loadingBkg.setVisibility(View.GONE);
+
+                if (laptops == null){
+                    Log.d(TAG, "sin conexión");
+                    showToast();
+                    hideLoadingAnimation();
+                    return;
+                }
+
+                if(!laptops.isEmpty()){
+                   hideLoadingAnimation();
                     laptopArrayList = new ArrayList<>(laptops);
                     adapter.updateData(laptopArrayList);
                 }
+
             }
         });
     }
@@ -83,5 +99,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerAdapter.O
         Log.d(TAG, "laptopSelected= " + laptopSelected.toString());
         detalleLaptopIntent.putExtra(DETALLE,laptopSelected);
         startActivity(detalleLaptopIntent);
+    }
+
+    private void showToast(){
+        noEncontrado.setVisibility(View.VISIBLE);
+        noEncontradoBkg.setVisibility(View.VISIBLE);
+        Toast toast = Toast.makeText(MainActivity.this, "Sin Conexión\nInténtelo más tarde", Toast.LENGTH_LONG);
+        TextView v = toast.getView().findViewById(android.R.id.message);
+        if( v != null) v.setGravity(Gravity.CENTER);
+        toast.show();
+    }
+
+    private void hideLoadingAnimation(){
+        loading.setVisibility(View.GONE);
+        loadingBkg.setVisibility(View.GONE);
     }
 }
